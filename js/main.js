@@ -1,17 +1,33 @@
 // Resync VA — Main JavaScript
 // Add your custom scripts here
 
-// Mobile nav toggle
+// Mobile nav — side drawer
 const navToggle = document.querySelector('.nav-toggle');
 const navLinks  = document.querySelector('.nav-links');
+const navOverlay = document.getElementById('navOverlay');
+
+function openMenu() {
+  navLinks.classList.add('open');
+  navOverlay.classList.add('open');
+  navToggle.innerHTML = '&#10005;';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMenu() {
+  navLinks.classList.remove('open');
+  navOverlay.classList.remove('open');
+  navToggle.innerHTML = '&#9776;';
+  document.body.style.overflow = '';
+}
 
 navToggle.addEventListener('click', () => {
-  navLinks.classList.toggle('open');
+  navLinks.classList.contains('open') ? closeMenu() : openMenu();
 });
 
-// Close menu when a link is clicked
+navOverlay.addEventListener('click', closeMenu);
+
 navLinks.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => navLinks.classList.remove('open'));
+  link.addEventListener('click', closeMenu);
 });
 
 // Scroll fade-in — individual elements with stagger

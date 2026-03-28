@@ -1,6 +1,11 @@
 // Resync VA — Main JavaScript
 // Add your custom scripts here
 
+// ── Apply config values ──
+document.querySelectorAll('[data-booking-link]').forEach(el => el.href = SITE_CONFIG.bookingUrl);
+document.querySelectorAll('[data-email-link]').forEach(el => { el.href = 'mailto:' + SITE_CONFIG.email; });
+document.querySelectorAll('[data-whatsapp-link]').forEach(el => { el.href = SITE_CONFIG.whatsapp; });
+
 // Mobile nav — side drawer
 const navToggle = document.querySelector('.nav-toggle');
 const navLinks  = document.querySelector('.nav-links');

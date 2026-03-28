@@ -1445,7 +1445,7 @@ footer {
   .how-step-line { display: none; }
 
   /* Who */
-  .who-grid { grid-template-columns: 1fr; }
+  .who-grid { grid-template-columns: repeat(2, 1fr); }
   .who-nudge { flex-direction: column; gap: 16px; text-align: center; }
 
   /* Staffing */

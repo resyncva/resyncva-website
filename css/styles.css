@@ -1459,6 +1459,10 @@ footer {
   .who-top { flex-direction: column; align-items: flex-start; gap: 20px; }
   .who-top .subtext { text-align: left; max-width: 100%; }
 
+  /* How top — stack vertically */
+  .how-top { grid-template-columns: 1fr; gap: 20px; }
+  .how-top .subtext { text-align: left; max-width: 100%; }
+
   /* Services top — stack vertically */
   .services-top { flex-direction: column; align-items: flex-start; gap: 20px; }
   .services-top .subtext { text-align: left; max-width: 100%; }

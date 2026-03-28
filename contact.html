@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us — Resync VA</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="css/styles.css">
+<style>
+  /* ── Contact page specific styles ── */
+  .contact-hero {
+    background: var(--plum);
+    padding: 72px 80px 64px;
+    border-bottom: 1px solid rgba(226,197,243,0.08);
+  }
+  .contact-hero .tag { color: rgba(226,197,243,0.4); }
+  .contact-hero .heading { color: var(--lav); margin-bottom: 16px; }
+  .contact-hero .subtext { color: rgba(226,197,243,0.45); margin-top: 0; }
+
+  .contact-body {
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 80px;
+    padding: 72px 80px;
+    align-items: start;
+    background: var(--white);
+  }
+
+  /* Form */
+  .contact-form { display: flex; flex-direction: column; gap: 24px; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+  .form-group { display: flex; flex-direction: column; gap: 8px; }
+
+  .form-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--plum);
+  }
+
+  .form-label span {
+    color: var(--accent);
+    margin-left: 2px;
+  }
+
+  .form-hint {
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--muted);
+    margin-top: -4px;
+  }
+
+  .form-input,
+  .form-select,
+  .form-textarea {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--plum);
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    padding: 12px 14px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    width: 100%;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+  .form-input::placeholder,
+  .form-textarea::placeholder { color: rgba(38,1,52,0.3); }
+
+  .form-input:focus,
+  .form-select:focus,
+  .form-textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(184,127,212,0.12);
+  }
+
+  .form-textarea { resize: vertical; min-height: 110px; line-height: 1.7; }
+
+  .form-select-wrap { position: relative; }
+  .form-select-wrap::after {
+    content: '▾';
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--muted);
+    font-size: 11px;
+    pointer-events: none;
+  }
+
+  /* Quick-select (GST) */
+  .quick-select { display: flex; gap: 10px; flex-wrap: wrap; }
+
+  .quick-select input[type="radio"] { display: none; }
+
+  .quick-select label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    border: 1.5px solid var(--border);
+    border-radius: 4px;
+    padding: 9px 18px;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+    user-select: none;
+  }
+
+  .quick-select input[type="radio"]:checked + label {
+    border-color: var(--accent);
+    color: var(--plum);
+    background: rgba(184,127,212,0.08);
+  }
+
+  /* Checkbox multi-select */
+  .check-multi { display: flex; flex-direction: column; gap: 10px; }
+
+  .check-multi-item { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+
+  .check-multi-item input[type="checkbox"] { display: none; }
+
+  .check-box {
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid var(--border);
+    border-radius: 4px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .check-box::after {
+    content: '✓';
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--white);
+    display: none;
+  }
+
+  .check-multi-item input[type="checkbox"]:checked ~ .check-box {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .check-multi-item input[type="checkbox"]:checked ~ .check-box::after { display: block; }
+
+  .check-multi-label {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--text);
+  }
+
+  /* Submit */
+  .form-submit { margin-top: 8px; }
+  .form-submit .btn-dark { padding: 15px 32px; font-size: 11px; }
+
+  /* Success state */
+  .contact-success {
+    display: none;
+    text-align: center;
+    padding: 60px 20px;
+  }
+  .contact-success.visible { display: block; }
+  .success-icon { font-size: 48px; margin-bottom: 20px; }
+  .success-head {
+    font-family: var(--serif);
+    font-size: 32px;
+    font-weight: 400;
+    color: var(--plum);
+    margin-bottom: 12px;
+  }
+  .success-body {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 28px;
+  }
+
+  /* Sidebar */
+  .contact-sidebar { display: flex; flex-direction: column; gap: 20px; }
+
+  .contact-info-card {
+    background: var(--soft);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 28px 24px;
+  }
+
+  .contact-info-card .tag { margin-bottom: 20px; }
+
+  .contact-info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .contact-info-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .contact-info-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .contact-info-label {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+
+  .contact-info-value {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--plum);
+    text-decoration: none;
+  }
+  .contact-info-value:hover { color: var(--accent); }
+
+  .contact-booking-card {
+    background: var(--plum);
+    border-radius: 10px;
+    padding: 28px 24px;
+    text-align: center;
+  }
+  .contact-booking-card .tag { color: rgba(226,197,243,0.4); margin-bottom: 12px; }
+  .booking-head {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--lav);
+    line-height: 1.3;
+    margin-bottom: 10px;
+  }
+  .booking-body {
+    font-size: 12px;
+    font-weight: 300;
+    color: rgba(226,197,243,0.45);
+    line-height: 1.8;
+    margin-bottom: 20px;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .contact-hero { padding: 60px 40px 52px; }
+    .contact-body { padding: 60px 40px; grid-template-columns: 1fr; gap: 48px; }
+  }
+
+  @media (max-width: 768px) {
+    .contact-hero { padding: 48px 20px 40px; }
+    .contact-body { padding: 40px 20px; gap: 40px; }
+    .form-row { grid-template-columns: 1fr; gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<div class="nav-overlay" id="navOverlay"></div>
+<nav>
+  <div class="nav-brand">
+    <img src="images/logo.png" alt="Resync Virtual Assistance" class="nav-logo">
+  </div>
+  <button class="nav-toggle" aria-label="Toggle menu">&#9776;</button>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="index.html#staffing">Staffing</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="https://outlook.office.com/book/ScheduleaFreeDiscoverySession@resyncva.com/?ismsaljsauthenabled=true" class="nav-cta">Book a Discovery Call</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="contact-hero">
+  <span class="tag">Get in Touch</span>
+  <h1 class="heading">Let's talk about<br><em>your business.</em></h1>
+  <p class="subtext">Welcome, and thank you for your interest in our services. We'd love to learn more about your business so we can provide tailored support that helps you stay on top of your finances and focus on growth.</p>
+</div>
+
+<!-- BODY -->
+<div class="contact-body">
+
+  <!-- FORM -->
+  <div>
+    <form class="contact-form" id="contactForm" action="https://hook.eu1.make.com/d7lkzajqpenknm1b7hhs3r8wdcv7wuu1" method="POST">
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="name">Full Name <span>*</span></label>
+          <input class="form-input" type="text" id="name" name="name" placeholder="Jane Smith" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="email">Email Address <span>*</span></label>
+          <input class="form-input" type="email" id="email" name="email" placeholder="jane@yourbusiness.com.au" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="phone">Contact Number <span>*</span></label>
+        <input class="form-input" type="tel" id="phone" name="phone" placeholder="+61 4XX XXX XXX" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="software">Accounting Software <span>*</span></label>
+        <p class="form-hint">Which accounting software do you currently use to manage your business finances?</p>
+        <div class="form-select-wrap">
+          <select class="form-select" id="software" name="software" required>
+            <option value="" disabled selected>Select software…</option>
+            <option>Xero</option>
+            <option>MYOB</option>
+            <option>QuickBooks</option>
+            <option>Reckon</option>
+            <option>Sage</option>
+            <option>Spreadsheets only</option>
+            <option>None / Not set up yet</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group" id="otherSoftwareGroup" style="display:none;">
+        <label class="form-label" for="otherSoftware">Please specify</label>
+        <input class="form-input" type="text" id="otherSoftware" name="other_software" placeholder="Software name…">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">GST Registration <span>*</span></label>
+        <div class="quick-select">
+          <input type="radio" name="gst" id="gst-yes" value="Yes" required>
+          <label for="gst-yes">Yes, registered for GST</label>
+          <input type="radio" name="gst" id="gst-no" value="No">
+          <label for="gst-no">No, not registered</label>
+          <input type="radio" name="gst" id="gst-unsure" value="Not sure">
+          <label for="gst-unsure">Not sure</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="business">About Your Business</label>
+        <p class="form-hint">Please tell us a little about your business — industry, employee count, and main financial challenges.</p>
+        <textarea class="form-textarea" id="business" name="business" placeholder="e.g. We're a 5-person allied health practice in Melbourne. We're struggling to keep on top of our books and aren't sure if we're BAS-compliant…"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Areas You'd Like Support In</label>
+        <p class="form-hint">Which areas of your business would you like more clarity and support in?</p>
+        <div class="check-multi">
+          <label class="check-multi-item">
+            <input type="checkbox" name="support_areas" value="Bookkeeping & Bank Reconciliations">
+            <span class="check-box"></span>
+            <span class="check-multi-label">Bookkeeping & Bank Reconciliations</span>
+          </label>
+          <label class="check-multi-item">
+            <input type="checkbox" name="support_areas" value="Payroll & STP">
+            <span class="check-box"></span>
+            <span class="check-multi-label">Payroll & STP</span>
+          </label>
+          <label class="check-multi-item">
+            <input type="checkbox" name="support_areas" value="BAS / IAS Preparation">
+            <span class="check-box"></span>
+            <span class="check-multi-label">BAS / IAS Preparation</span>
+          </label>
+          <label class="check-multi-item">
+            <input type="checkbox" name="support_areas" value="Financial Reporting & Advisory">
+            <span class="check-box"></span>
+            <span class="check-multi-label">Financial Reporting & Advisory</span>
+          </label>
+          <label class="check-multi-item">
+            <input type="checkbox" name="support_areas" value="Accounts Payable / Receivable">
+            <span class="check-box"></span>
+            <span class="check-multi-label">Accounts Payable / Receivable</span>
+          </label>
+          <label class="check-multi-item">
+            <input type="checkbox" name="support_areas" value="Software Setup & Migration">
+            <span class="check-box"></span>
+            <span class="check-multi-label">Software Setup & Migration</span>
+          </label>
+          <label class="check-multi-item">
+            <input type="checkbox" name="support_areas" value="Staffing & Recruitment">
+            <span class="check-box"></span>
+            <span class="check-multi-label">Staffing & Recruitment</span>
+          </label>
+          <label class="check-multi-item">
+            <input type="checkbox" name="support_areas" value="Other" id="otherAreaCheck">
+            <span class="check-box"></span>
+            <span class="check-multi-label">Other</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group" id="otherAreaGroup" style="display:none;">
+        <label class="form-label" for="otherArea">Please specify</label>
+        <input class="form-input" type="text" id="otherArea" name="other_area" placeholder="Describe what you need…">
+      </div>
+
+      <div class="form-submit">
+        <button type="submit" class="btn btn-dark">Send Enquiry →</button>
+      </div>
+
+    </form>
+
+    <!-- Success state -->
+    <div class="contact-success" id="contactSuccess">
+      <div class="success-icon">✅</div>
+      <h2 class="success-head">Thank you.</h2>
+      <p class="success-body">We appreciate you taking the time to complete this form.<br>We'll be in touch shortly.</p>
+      <a href="contact.html" class="btn btn-dark">Submit another enquiry</a>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="contact-sidebar">
+
+    <div class="contact-info-card">
+      <span class="tag">Contact Details</span>
+      <div class="contact-info-item">
+        <div class="contact-info-icon">✉️</div>
+        <div>
+          <div class="contact-info-label">Email</div>
+          <a href="mailto:hello@resyncva.com" class="contact-info-value">hello@resyncva.com</a>
+        </div>
+      </div>
+      <div class="contact-info-item">
+        <div class="contact-info-icon">💬</div>
+        <div>
+          <div class="contact-info-label">WhatsApp</div>
+          <a href="#" class="contact-info-value">Message us on WhatsApp</a>
+        </div>
+      </div>
+      <div class="contact-info-item">
+        <div class="contact-info-icon">🌏</div>
+        <div>
+          <div class="contact-info-label">Based in</div>
+          <span class="contact-info-value">Serving Australian businesses</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-booking-card">
+      <span class="tag">Prefer a call?</span>
+      <h3 class="booking-head">Book a free 30-minute discovery call</h3>
+      <p class="booking-body">No pressure, no hard sell — just a real conversation about your business and whether we're the right fit.</p>
+      <a href="https://outlook.office.com/book/ScheduleaFreeDiscoverySession@resyncva.com/?ismsaljsauthenabled=true" class="btn btn-dark" style="width:100%;text-align:center;display:block;">Book a Discovery Call</a>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <img src="images/logo.png" alt="Resync Virtual Assistance" class="footer-logo">
+      <p class="footer-tagline">Trusted bookkeeping and finance admin support for growing Australian businesses.</p>
+    </div>
+    <div>
+      <div class="footer-col-head">Services</div>
+      <ul class="footer-links">
+        <li><a href="index.html#services">Bookkeeping</a></li>
+        <li><a href="index.html#services">Payroll</a></li>
+        <li><a href="index.html#services">Virtual CFO</a></li>
+        <li><a href="index.html#staffing">Staffing</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-head">Quick Links</div>
+      <ul class="footer-links">
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#how">How We Work</a></li>
+        <li><a href="index.html#pricing">Pricing</a></li>
+        <li><a href="index.html#faq">FAQs</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-head">Get in Touch</div>
+      <ul class="footer-links">
+        <li><a href="https://outlook.office.com/book/ScheduleaFreeDiscoverySession@resyncva.com/?ismsaljsauthenabled=true">Book a Discovery Call</a></li>
+        <li><a href="mailto:hello@resyncva.com">Email: hello@resyncva.com</a></li>
+        <li><a href="#">WhatsApp</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 Resync Virtual Assistance Services · resyncva.com</div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+  // Show "Other software" field conditionally
+  document.getElementById('software').addEventListener('change', function () {
+    document.getElementById('otherSoftwareGroup').style.display =
+      this.value === 'Other' ? 'flex' : 'none';
+  });
+
+  // Show "Other area" field conditionally
+  document.getElementById('otherAreaCheck').addEventListener('change', function () {
+    document.getElementById('otherAreaGroup').style.display =
+      this.checked ? 'flex' : 'none';
+  });
+
+  // Handle form submission — show success state
+  document.getElementById('contactForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    const form = this;
+    const data = new FormData(form);
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        form.style.display = 'none';
+        document.getElementById('contactSuccess').classList.add('visible');
+      } else {
+        alert('Something went wrong. Please email us directly at hello@resyncva.com');
+      }
+    } catch {
+      alert('Something went wrong. Please email us directly at hello@resyncva.com');
+    }
+  });
+</script>
+</body>
+</html>

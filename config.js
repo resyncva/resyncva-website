@@ -11,7 +11,7 @@ const SITE_CONFIG = {
 
   // Contact details
   email: 'hello@resyncva.com',
-  whatsapp: '#', // Replace # with your WhatsApp link, e.g. https://wa.me/61400000000
+  whatsapp: 'tel:+639296870720',
 
   // Contact form webhook (Make.com)
   formWebhook: 'https://hook.eu1.make.com/d7lkzajqpenknm1b7hhs3r8wdcv7wuu1',

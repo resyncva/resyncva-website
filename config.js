@@ -7,7 +7,7 @@
 const SITE_CONFIG = {
 
   // Booking link — update this to change all "Book a Discovery Call" buttons
-  bookingUrl: 'https://outlook.office.com/book/ScheduleaFreeDiscoverySession@resyncva.com/?ismsaljsauthenabled=true',
+  bookingUrl: 'https://outlook.office.com/book/ScheduleaFreeDiscoveryCallwithReyz@resyncva.com/?ismsaljsauthenabled=true',
 
   // Contact details
   email: 'hello@resyncva.com',

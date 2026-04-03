@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing — Resync VA</title>
+<meta name="description" content="Straightforward pricing shaped around your business. Bookkeeping, payroll, and finance support for Australian businesses.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+
+:root {
+  --plum:   #260134;
+  --purple: #44095b;
+  --lav:    #e2c5f3;
+  --white:  #ffffff;
+  --light:  #f7f0fc;
+  --ink:    #1a0124;
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans:  'Montserrat', Arial, sans-serif;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--sans); background: var(--white); color: var(--plum); overflow-x: hidden; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: var(--purple); padding: 0 56px; height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.nav-logo { height: 50px; width: auto; display: block; }
+.nav-logo-icon { width: 28px; height: 28px; }
+.nav-wordmark { font-family: var(--serif); font-size: 18px; font-weight: 400; letter-spacing: 0.16em; color: var(--lav); text-transform: uppercase; }
+.nav-sub { font-size: 6.5px; letter-spacing: 0.32em; color: rgba(226,197,243,0.38); text-transform: uppercase; display: block; margin-top: 1px; }
+.nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+.nav-links a { font-size: 10.5px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(226,197,243,0.58); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover, .nav-links a.active { color: var(--lav); }
+.nav-cta { font-size: 10px !important; font-weight: 600 !important; color: var(--purple) !important; background: var(--lav); padding: 9px 20px !important; border-radius: 2px; letter-spacing: 0.1em !important; }
+.nav-cta:hover { opacity: 0.88; }
+
+/* ── HEADER ── */
+.pricing-header {
+  padding: 116px 64px 68px;
+  background: var(--white);
+  border-bottom: 1px solid rgba(38,1,52,0.06);
+  animation: fadeUp 0.85s cubic-bezier(.16,1,.3,1) both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.header-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: flex-end; gap: 80px;
+}
+
+.header-tag {
+  font-size: 9px; font-weight: 600; letter-spacing: 0.38em;
+  text-transform: uppercase; color: rgba(38,1,52,0.6);
+  display: block; margin-bottom: 20px;
+}
+
+.header-heading {
+  font-family: var(--serif);
+  font-size: 48px; font-weight: 400; line-height: 1.12;
+  color: var(--plum);
+}
+
+.header-right {
+  flex-shrink: 0; max-width: 300px;
+  font-size: 13px; font-weight: 300; line-height: 1.9;
+  color: rgba(38,1,52,0.65); text-align: right;
+}
+
+/* ── PRICING SECTION ── */
+.pricing-main {
+  padding: 72px 64px 88px;
+  background: var(--white);
+}
+
+.pricing-inner { max-width: 1200px; margin: 0 auto; }
+
+/* 3-col tiers */
+.tier-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.16fr 1fr;
+  gap: 2px;
+  margin-bottom: 2px;
+  align-items: stretch;
+}
+
+.tier-card {
+  background: var(--light);
+  padding: 40px 36px 36px;
+  border: 1px solid rgba(38,1,52,0.06);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.t-list { flex: 1; }
+
+.tier-card.featured {
+  background: var(--plum);
+  border-color: transparent;
+  padding-top: 54px;
+}
+
+.popular-pill {
+  position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+  font-size: 7.5px; font-weight: 700; letter-spacing: 0.22em;
+  text-transform: uppercase;
+  background: var(--lav); color: var(--purple);
+  padding: 5px 16px; border-radius: 20px; white-space: nowrap;
+}
+
+.t-name {
+  font-family: var(--serif);
+  font-size: 28px; font-weight: 400;
+  color: var(--plum); line-height: 1.1; margin-bottom: 5px;
+}
+.featured .t-name { color: var(--lav); }
+
+.t-price {
+  font-size: 13px; font-weight: 600;
+  color: var(--purple); margin-bottom: 26px;
+}
+.featured .t-price { color: var(--lav); opacity: 0.8; }
+
+.t-rule { height: 1px; background: rgba(38,1,52,0.1); margin-bottom: 24px; }
+.featured .t-rule { background: rgba(226,197,243,0.1); }
+
+.t-list { list-style: none; display: flex; flex-direction: column; gap: 11px; margin-bottom: 30px; }
+
+.t-item {
+  display: flex; align-items: flex-start; gap: 12px;
+  font-size: 12.5px; font-weight: 300; line-height: 1.5;
+  color: rgba(38,1,52,0.8);
+}
+.featured .t-item { color: rgba(226,197,243,0.65); }
+
+.t-dash { flex-shrink: 0; width: 14px; height: 1px; background: rgba(38,1,52,0.22); margin-top: 8px; }
+.featured .t-dash { background: rgba(226,197,243,0.22); }
+
+.t-best {
+  font-family: var(--serif); font-style: italic;
+  font-size: 12px; color: rgba(38,1,52,0.6); line-height: 1.65;
+}
+.featured .t-best { color: rgba(226,197,243,0.38); }
+
+/* 2-col add-ons */
+.addons-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+
+.addon-card {
+  background: var(--white);
+  border: 1px solid rgba(38,1,52,0.06);
+  padding: 40px 36px 36px;
+}
+
+.a-name {
+  font-family: var(--serif);
+  font-size: 26px; font-weight: 400;
+  color: var(--plum); margin-bottom: 5px;
+}
+
+.a-price { font-size: 12.5px; font-weight: 600; color: var(--purple); margin-bottom: 22px; }
+
+.a-rule { height: 1px; background: rgba(38,1,52,0.08); margin-bottom: 22px; }
+
+.a-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+
+.a-item {
+  display: flex; align-items: flex-start; gap: 12px;
+  font-size: 12.5px; font-weight: 300; line-height: 1.5;
+  color: rgba(38,1,52,0.8);
+}
+
+.a-dash { flex-shrink: 0; width: 14px; height: 1px; background: rgba(38,1,52,0.2); margin-top: 8px; }
+
+.a-best {
+  font-family: var(--serif); font-style: italic;
+  font-size: 12px; color: rgba(38,1,52,0.6); line-height: 1.65;
+}
+
+/* ── CTA BAND ── */
+.cta-band {
+  background: var(--purple); padding: 80px 64px;
+  display: flex; align-items: center; justify-content: space-between; gap: 48px;
+  position: relative; overflow: hidden;
+}
+.cta-band::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: radial-gradient(rgba(226,197,243,0.04) 1px, transparent 1px);
+  background-size: 24px 24px; pointer-events: none;
+}
+.cta-band::after {
+  content: ''; position: absolute; width: 500px; height: 500px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(38,1,52,0.4) 0%, transparent 65%);
+  right: -120px; top: 50%; transform: translateY(-50%); pointer-events: none;
+}
+.cta-text { position: relative; z-index: 2; }
+.cta-tag {
+  font-size: 9px; font-weight: 600; letter-spacing: 0.38em; text-transform: uppercase;
+  color: rgba(226,197,243,0.65); display: block; margin-bottom: 14px;
+}
+.cta-heading {
+  font-family: var(--serif); font-size: 34px; font-weight: 400;
+  line-height: 1.2; color: var(--lav); max-width: 440px;
+}
+.cta-sub {
+  font-size: 13px; font-weight: 300; line-height: 1.8;
+  color: rgba(226,197,243,0.75); margin-top: 10px; max-width: 420px;
+}
+.cta-actions { display: flex; gap: 14px; flex-shrink: 0; position: relative; z-index: 2; }
+.btn-primary {
+  font-size: 10.5px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--purple); background: var(--lav); padding: 14px 28px; border-radius: 2px;
+  text-decoration: none; transition: opacity 0.2s; white-space: nowrap;
+}
+.btn-primary:hover { opacity: 0.88; }
+.btn-ghost {
+  font-size: 10.5px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(226,197,243,0.6); border: 1px solid rgba(226,197,243,0.18);
+  padding: 14px 28px; border-radius: 2px; text-decoration: none;
+  transition: border-color 0.2s, color 0.2s; white-space: nowrap;
+}
+.btn-ghost:hover { border-color: rgba(226,197,243,0.45); color: var(--lav); }
+
+/* ── FOOTER ── */
+footer { background: #260134; padding: 64px 80px 40px; }
+.footer-logo { height: 52px; width: auto; display: block; margin-bottom: 14px; }
+.footer-tagline { font-size: 12px; font-weight: 300; color: rgba(226,197,243,0.4); max-width: 220px; line-height: 1.7; }
+.footer-top { display: grid; grid-template-columns: 1fr auto auto; gap: 48px; padding-bottom: 40px; border-bottom: 1px solid rgba(226,197,243,0.07); }
+.footer-col-head { font-size: 9px; font-weight: 600; letter-spacing: 0.32em; text-transform: uppercase; color: rgba(226,197,243,0.3); margin-bottom: 16px; }
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-links a { font-size: 12px; font-weight: 300; color: rgba(226,197,243,0.5); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: rgba(226,197,243,0.9); }
+.footer-bottom { padding-top: 24px; }
+.footer-copy { font-size: 11px; color: rgba(226,197,243,0.2); letter-spacing: 0.04em; }
+
+/* ── CUSTOM PRICING CTA ── */
+.cta-section {
+  background: var(--white);
+  padding: 72px 64px 56px;
+  display: flex; flex-direction: column; align-items: center;
+}
+
+.cta-rule-row {
+  display: flex; align-items: center; gap: 20px;
+  width: 100%; max-width: 560px; margin-bottom: 36px;
+}
+
+.cta-rule-line {
+  flex: 1; height: 1px; background: rgba(38,1,52,0.1);
+}
+
+.cta-rule-text {
+  font-size: 8.5px; font-weight: 600; letter-spacing: 0.3em;
+  text-transform: uppercase; color: rgba(38,1,52,0.3);
+  white-space: nowrap;
+}
+
+.cta-card {
+  background: var(--plum);
+  border-radius: 16px;
+  padding: 56px 48px 52px;
+  max-width: 560px; width: 100%;
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+
+.cta-diamond {
+  position: absolute; pointer-events: none;
+}
+
+.cta-diamond-tr { width: 48px; height: 48px; top: 24px; right: 28px; }
+.cta-diamond-bl { width: 36px; height: 36px; bottom: 32px; left: 24px; }
+
+.cta-card-tag {
+  font-size: 9px; font-weight: 600; letter-spacing: 0.3em;
+  text-transform: uppercase; color: var(--lav); opacity: 0.85;
+  display: block; margin-bottom: 18px;
+}
+
+.cta-card-heading {
+  font-family: var(--serif);
+  font-size: 32px; font-weight: 400; line-height: 1.2;
+  color: var(--lav); margin-bottom: 18px;
+}
+
+.cta-card-heading em {
+  font-style: italic; color: rgba(226,197,243,0.6);
+}
+
+.cta-card-body {
+  font-size: 13.5px; font-weight: 300; line-height: 1.85;
+  color: rgba(226,197,243,0.75); max-width: 380px; margin: 0 auto 32px;
+}
+
+.cta-card-btn {
+  display: inline-block;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.08em;
+  color: var(--purple); background: var(--lav);
+  padding: 14px 40px; border-radius: 4px;
+  text-decoration: none; transition: opacity 0.2s;
+  margin-bottom: 18px;
+}
+
+.cta-card-btn:hover { opacity: 0.88; }
+
+.cta-card-link {
+  display: block;
+  font-size: 11.5px; font-weight: 400;
+  color: rgba(226,197,243,0.7);
+  text-decoration: underline; text-underline-offset: 3px;
+  text-decoration-color: rgba(226,197,243,0.35);
+  transition: color 0.2s;
+}
+
+.cta-card-link:hover { color: rgba(226,197,243,0.7); }
+
+.cta-footnote {
+  font-size: 11.5px; font-weight: 300; line-height: 1.75;
+  color: rgba(38,1,52,0.6); text-align: center;
+  max-width: 400px; margin-top: 24px;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .tier-grid { grid-template-columns: 1fr; }
+  .addons-grid { grid-template-columns: 1fr; }
+  .header-inner { flex-direction: column; align-items: flex-start; gap: 20px; }
+  .header-right { text-align: left; max-width: 100%; }
+}
+@media (max-width: 768px) {
+  nav { padding: 0 24px; }
+  .nav-links { display: none; }
+  .pricing-header { padding: 96px 28px 52px; }
+  .header-heading { font-size: 34px; }
+  .pricing-main { padding: 52px 28px 72px; }
+  .cta-band { flex-direction: column; padding: 56px 28px; }
+  .cta-actions { flex-direction: column; width: 100%; }
+  .btn-primary, .btn-ghost { text-align: center; }
+  footer { padding: 48px 28px 28px; }
+  .footer-links { flex-wrap: wrap; justify-content: center; gap: 20px; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">
+    <a href="index.html"><img src="images/logo.png" alt="Resync Virtual Assistance" class="nav-logo"></a>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="pricing.html" class="active">Pricing</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="#" data-booking-link class="nav-cta">Book a Discovery Call</a></li>
+  </ul>
+</nav>
+
+
+<!-- HEADER -->
+<header class="pricing-header">
+  <div class="header-inner">
+    <div>
+      <span class="header-tag">The honest numbers</span>
+      <h1 class="header-heading">
+        Straightforward pricing,<br>shaped around your business.
+      </h1>
+    </div>
+    <p class="header-right">
+      These are starting points — every engagement is shaped around what your business actually needs.
+    </p>
+  </div>
+</header>
+
+
+<!-- PRICING -->
+<main class="pricing-main">
+  <div class="pricing-inner">
+
+    <!-- 3-col tier cards -->
+    <div class="tier-grid">
+
+      <!-- Sorted -->
+      <div class="tier-card">
+        <div class="t-name">Sorted</div>
+        <div class="t-price">From $125/week</div>
+        <div class="t-rule"></div>
+        <ul class="t-list">
+          <li class="t-item"><span class="t-dash"></span>Bookkeeping &amp; bank reconciliations</li>
+          <li class="t-item"><span class="t-dash"></span>Receipts and document management</li>
+          <li class="t-item"><span class="t-dash"></span>Basic monthly P&amp;L reporting</li>
+          <li class="t-item"><span class="t-dash"></span>Payroll for 1–2 employees (STP filing &amp; EOFY finalisation)</li>
+          <li class="t-item"><span class="t-dash"></span>Auto super processing</li>
+        </ul>
+        <div class="t-best">Best for: Sole traders &amp; small businesses just getting started</div>
+      </div>
+
+      <!-- On Track — featured -->
+      <div class="tier-card featured">
+        <span class="popular-pill">Most popular</span>
+        <div class="t-name">On Track</div>
+        <div class="t-price">From $225/week</div>
+        <div class="t-rule"></div>
+        <ul class="t-list">
+          <li class="t-item"><span class="t-dash"></span>Everything in Sorted</li>
+          <li class="t-item"><span class="t-dash"></span>Payroll for up to 5 (STP filing &amp; EOFY finalisation)</li>
+          <li class="t-item"><span class="t-dash"></span>Auto super processing</li>
+          <li class="t-item"><span class="t-dash"></span>Monthly management reporting</li>
+          <li class="t-item"><span class="t-dash"></span>Accounts receivable / accounts payable management</li>
+          <li class="t-item"><span class="t-dash"></span>Dedicated accounts inbox management</li>
+        </ul>
+        <div class="t-best">Best for: Growing businesses with a small team</div>
+      </div>
+
+      <!-- Ahead -->
+      <div class="tier-card">
+        <div class="t-name">Ahead</div>
+        <div class="t-price">From $400/week</div>
+        <div class="t-rule"></div>
+        <ul class="t-list">
+          <li class="t-item"><span class="t-dash"></span>Everything in On Track</li>
+          <li class="t-item"><span class="t-dash"></span>Payroll for up to 10 (STP filing &amp; EOFY finalisation)</li>
+          <li class="t-item"><span class="t-dash"></span>Auto super processing</li>
+          <li class="t-item"><span class="t-dash"></span>BAS / IAS review</li>
+          <li class="t-item"><span class="t-dash"></span>Cashflow reporting</li>
+          <li class="t-item"><span class="t-dash"></span>Budget &amp; forecast modelling</li>
+          <li class="t-item"><span class="t-dash"></span>End-of-financial-year audit support</li>
+        </ul>
+        <div class="t-best">Best for: Businesses ready for a more hands-on finance partner</div>
+      </div>
+
+    </div>
+
+    <!-- 2-col add-on cards -->
+    <div class="addons-grid">
+
+      <div class="addon-card">
+        <div class="a-name">Virtual CFO &amp; Advisory</div>
+        <div class="a-price">Quoted on scope</div>
+        <div class="a-rule"></div>
+        <ul class="a-list">
+          <li class="a-item"><span class="a-dash"></span>Budget &amp; forecast modelling</li>
+          <li class="a-item"><span class="a-dash"></span>Cashflow reporting &amp; forecasting</li>
+          <li class="a-item"><span class="a-dash"></span>Business performance reporting</li>
+          <li class="a-item"><span class="a-dash"></span>One-off financial reviews</li>
+          <li class="a-item"><span class="a-dash"></span>Ad-hoc advisory hours</li>
+        </ul>
+        <div class="a-best">Best for: Businesses that need strategic finance support — ongoing, project-based, or one-off</div>
+      </div>
+
+      <div class="addon-card">
+        <div class="a-name">Cleanups &amp; System Setup</div>
+        <div class="a-price">Quoted on scope</div>
+        <div class="a-rule"></div>
+        <ul class="a-list">
+          <li class="a-item"><span class="a-dash"></span>Xero / MYOB setup or migration</li>
+          <li class="a-item"><span class="a-dash"></span>Third-party app integrations</li>
+          <li class="a-item"><span class="a-dash"></span>Chart of accounts setup</li>
+          <li class="a-item"><span class="a-dash"></span>Accounting system health check</li>
+          <li class="a-item"><span class="a-dash"></span>Prior period catchup &amp; backlog cleanup</li>
+          <li class="a-item"><span class="a-dash"></span>And more — just ask</li>
+        </ul>
+        <div class="a-best">Best for: Businesses starting fresh, switching platforms, or getting their records back on track</div>
+      </div>
+
+    </div>
+
+  </div>
+</main>
+
+
+
+
+<!-- CUSTOM PRICING CTA -->
+<section class="cta-section">
+  <div class="cta-card">
+    <svg class="cta-diamond cta-diamond-tr" viewBox="0 0 32 32" fill="none"><path d="M16 0L32 16L16 32L0 16Z" fill="rgba(226,197,243,0.12)"/></svg>
+    <svg class="cta-diamond cta-diamond-bl" viewBox="0 0 24 24" fill="none"><path d="M12 0L24 12L12 24L0 12Z" fill="rgba(226,197,243,0.08)"/></svg>
+
+    <span class="cta-card-tag">Custom pricing</span>
+    <h2 class="cta-card-heading">
+      Let's build your quote <em>together.</em>
+    </h2>
+    <p class="cta-card-body">
+      Every business is a little different — so your support should be too. Tell us a bit about what you need and we'll put something together that actually fits.
+    </p>
+    <a href="contact.html" class="cta-card-btn">Get in touch</a>
+    <a href="#" data-booking-link class="cta-card-link">or book a free discovery call</a>
+  </div>
+
+  <p class="cta-footnote">No hard sell, no obligation — just a real conversation about what works for you.</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <img src="images/logo-footer.png" alt="Resync Virtual Assistance" class="footer-logo">
+      <p class="footer-tagline">Trusted bookkeeping and finance admin support for growing Australian businesses.</p>
+    </div>
+    <div>
+      <div class="footer-col-head">Quick Links</div>
+      <ul class="footer-links">
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#how">How We Work</a></li>
+        <li><a href="index.html#faq">FAQs</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-head">Get in Touch</div>
+      <ul class="footer-links">
+        <li><a href="#" data-booking-link>Book a Discovery Call</a></li>
+        <li><a href="mailto:hello@resyncva.com">Email: hello@resyncva.com</a></li>
+        <li><a href="#" data-whatsapp-link>WhatsApp</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 Resync Virtual Assistance Services · resyncva.com</div>
+  </div>
+</footer>
+
+<script src="config.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

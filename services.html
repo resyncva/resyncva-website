@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Services — Resync VA</title>
+<meta name="description" content="From bookkeeping and payroll to staffing and recruitment — here's what Resync VA takes care of, so you don't have to.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+
+/* ══════════════════════════════════════════
+   TOKENS
+══════════════════════════════════════════ */
+:root {
+  --plum:   #260134;
+  --purple: #44095b;
+  --lav:    #e2c5f3;
+  --white:  #ffffff;
+  --light:  #f7f0fc;
+  --mid:    #c89ee0;
+  --ink:    #1a0124;
+
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans:  'Montserrat', Arial, sans-serif;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  background: var(--white);
+  color: var(--plum);
+  overflow-x: hidden;
+}
+
+/* ══════════════════════════════════════════
+   NAV
+══════════════════════════════════════════ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: var(--purple);
+  padding: 0 48px;
+  height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+
+.nav-logo {
+  height: 50px; width: auto; display: block;
+}
+
+.nav-logo-icon {
+  width: 28px; height: 28px;
+}
+
+.nav-wordmark {
+  font-family: var(--serif);
+  font-size: 18px; font-weight: 400;
+  letter-spacing: 0.16em; color: var(--lav);
+  text-transform: uppercase;
+}
+
+.nav-sub {
+  font-size: 6.5px; letter-spacing: 0.32em;
+  color: rgba(226,197,243,0.38); text-transform: uppercase;
+  display: block; margin-top: 1px;
+}
+
+.nav-links {
+  display: flex; align-items: center; gap: 32px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 10.5px; font-weight: 500; letter-spacing: 0.12em;
+  text-transform: uppercase; color: rgba(226,197,243,0.58);
+  text-decoration: none; transition: color 0.2s;
+}
+
+.nav-links a:hover,
+.nav-links a.active { color: var(--lav); }
+
+.nav-cta {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--purple) !important;
+  background: var(--lav);
+  padding: 9px 20px; border-radius: 2px;
+  text-decoration: none; transition: opacity 0.2s !important;
+}
+
+.nav-cta:hover { opacity: 0.88 !important; }
+
+/* ══════════════════════════════════════════
+   HERO
+══════════════════════════════════════════ */
+.hero {
+  background: var(--plum);
+  padding: 160px 64px 100px;
+  position: relative; overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(rgba(226,197,243,0.04) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  width: 700px; height: 700px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(68,9,91,0.6) 0%, transparent 65%);
+  top: 50%; right: -180px; transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.hero-inner {
+  position: relative; z-index: 2;
+  max-width: 1100px; margin: 0 auto;
+  animation: fadeUp 0.9s cubic-bezier(.16,1,.3,1) both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-tag {
+  font-size: 9px; font-weight: 600; letter-spacing: 0.38em;
+  text-transform: uppercase; color: rgba(226,197,243,0.36);
+  display: block; margin-bottom: 20px;
+}
+
+.hero-heading {
+  font-family: var(--serif);
+  font-size: 56px; font-weight: 400; line-height: 1.12;
+  color: var(--lav); max-width: 640px;
+}
+
+.hero-heading em {
+  font-style: italic; color: rgba(226,197,243,0.55);
+}
+
+.hero-rule {
+  width: 56px; height: 1px;
+  background: rgba(226,197,243,0.2);
+  margin: 32px 0;
+}
+
+.hero-body {
+  font-size: 14px; font-weight: 300; line-height: 2;
+  color: rgba(226,197,243,0.48); max-width: 480px;
+}
+
+/* ══════════════════════════════════════════
+   INTRO STRIP
+══════════════════════════════════════════ */
+.intro-strip {
+  background: var(--white);
+  padding: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 48px;
+  border-bottom: 1px solid rgba(38,1,52,0.07);
+}
+
+.intro-strip-text {
+  max-width: 600px;
+}
+
+.sec-tag {
+  font-size: 9px; font-weight: 600; letter-spacing: 0.38em;
+  text-transform: uppercase; display: block; margin-bottom: 14px;
+}
+
+.intro-label { color: rgba(38,1,52,0.38); }
+
+.intro-heading {
+  font-family: var(--serif);
+  font-size: 32px; font-weight: 400; line-height: 1.25;
+  color: var(--plum);
+}
+
+.intro-body {
+  font-size: 13.5px; font-weight: 300; line-height: 1.95;
+  color: rgba(38,1,52,0.58); margin-top: 16px;
+}
+
+.intro-count-row {
+  display: flex; gap: 40px; flex-shrink: 0;
+}
+
+.intro-count {
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+}
+
+.count-num {
+  font-family: var(--serif); font-size: 44px; font-weight: 400;
+  color: var(--purple); line-height: 1;
+}
+
+.count-label {
+  font-size: 9px; font-weight: 500; letter-spacing: 0.18em;
+  text-transform: uppercase; color: rgba(38,1,52,0.35);
+  margin-top: 8px; max-width: 80px; line-height: 1.6;
+}
+
+/* ══════════════════════════════════════════
+   SERVICES GRID
+══════════════════════════════════════════ */
+.services-section {
+  background: var(--light);
+  padding: 104px 64px 88px;
+}
+
+.services-section-inner {
+  max-width: 1200px; margin: 0 auto;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2px;
+  margin-top: 56px;
+}
+
+.svc-card {
+  background: var(--white);
+  padding: 40px 36px 44px;
+  position: relative;
+  transition: background 0.3s ease, transform 0.3s ease;
+  cursor: default;
+}
+
+.svc-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 2px;
+  background: transparent;
+  transition: background 0.3s ease;
+}
+
+.svc-card:hover {
+  background: var(--plum);
+  transform: translateY(-3px);
+}
+
+.svc-card:hover::before {
+  background: linear-gradient(90deg, var(--purple), var(--lav), var(--purple));
+}
+
+.svc-card:hover .svc-num        { color: rgba(226,197,243,0.22); }
+.svc-card:hover .svc-tag        { color: rgba(226,197,243,0.3); border-color: rgba(226,197,243,0.1); }
+.svc-card:hover .svc-title      { color: var(--lav); }
+.svc-card:hover .svc-rule       { background: rgba(226,197,243,0.1); }
+.svc-card:hover .svc-item       { color: rgba(226,197,243,0.5); }
+.svc-card:hover .svc-dot        { background: rgba(226,197,243,0.3); }
+
+/* Dark card (Staffing) — always dark */
+.svc-card.is-dark {
+  background: var(--plum);
+}
+
+.svc-card.is-dark::before {
+  background: linear-gradient(90deg, var(--purple), var(--lav), var(--purple));
+}
+
+.svc-card.is-dark .svc-num   { color: rgba(226,197,243,0.22); }
+.svc-card.is-dark .svc-tag   { color: rgba(226,197,243,0.3); border-color: rgba(226,197,243,0.1); }
+.svc-card.is-dark .svc-title { color: var(--lav); }
+.svc-card.is-dark .svc-rule  { background: rgba(226,197,243,0.1); }
+.svc-card.is-dark .svc-item  { color: rgba(226,197,243,0.5); }
+.svc-card.is-dark .svc-dot   { background: rgba(226,197,243,0.3); }
+.svc-card.is-dark:hover      { transform: translateY(-3px); }
+
+.svc-num {
+  font-family: var(--serif);
+  font-size: 11px; color: rgba(38,1,52,0.25);
+  letter-spacing: 0.12em;
+  display: block; margin-bottom: 16px;
+  transition: color 0.3s;
+}
+
+.svc-tag {
+  display: inline-block;
+  font-size: 8.5px; font-weight: 600; letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(38,1,52,0.32);
+  border: 1px solid rgba(38,1,52,0.12);
+  padding: 3px 10px; border-radius: 20px;
+  margin-bottom: 18px;
+  transition: color 0.3s, border-color 0.3s;
+}
+
+.svc-title {
+  font-family: var(--serif);
+  font-size: 21px; font-weight: 400; line-height: 1.3;
+  color: var(--plum);
+  transition: color 0.3s;
+}
+
+.svc-rule {
+  width: 32px; height: 1px;
+  background: rgba(38,1,52,0.1);
+  margin: 22px 0;
+  transition: background 0.3s;
+}
+
+.svc-list {
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-direction: column; gap: 10px;
+}
+
+.svc-item {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 12.5px; font-weight: 300; line-height: 1.55;
+  color: rgba(38,1,52,0.6);
+  transition: color 0.3s;
+}
+
+.svc-dot {
+  flex-shrink: 0;
+  width: 3px; height: 3px; border-radius: 50%;
+  background: rgba(38,1,52,0.25);
+  margin-top: 6px;
+  transition: background 0.3s;
+}
+
+/* ══════════════════════════════════════════
+   CTA BAND
+══════════════════════════════════════════ */
+.cta-band {
+  background: var(--purple);
+  padding: 80px 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 48px;
+  position: relative; overflow: hidden;
+}
+
+.cta-band::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(rgba(226,197,243,0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+}
+
+.cta-band::after {
+  content: '';
+  position: absolute;
+  width: 500px; height: 500px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(38,1,52,0.4) 0%, transparent 65%);
+  right: -120px; top: 50%; transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.cta-band-text { position: relative; z-index: 2; }
+
+.cta-band-tag {
+  font-size: 9px; font-weight: 600; letter-spacing: 0.38em;
+  text-transform: uppercase; color: rgba(226,197,243,0.35);
+  display: block; margin-bottom: 16px;
+}
+
+.cta-band-heading {
+  font-family: var(--serif);
+  font-size: 36px; font-weight: 400; line-height: 1.2;
+  color: var(--lav); max-width: 480px;
+}
+
+.cta-band-heading em {
+  font-style: italic; color: rgba(226,197,243,0.5);
+}
+
+.cta-band-actions {
+  display: flex; gap: 14px; flex-shrink: 0; position: relative; z-index: 2;
+}
+
+.btn-primary {
+  font-size: 10.5px; font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--purple);
+  background: var(--lav);
+  padding: 14px 28px; border-radius: 2px;
+  text-decoration: none;
+  transition: opacity 0.2s;
+  white-space: nowrap;
+}
+
+.btn-primary:hover { opacity: 0.88; }
+
+.btn-ghost {
+  font-size: 10.5px; font-weight: 500; letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(226,197,243,0.6);
+  border: 1px solid rgba(226,197,243,0.18);
+  padding: 14px 28px; border-radius: 2px;
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s;
+  white-space: nowrap;
+}
+
+.btn-ghost:hover { border-color: rgba(226,197,243,0.45); color: var(--lav); }
+
+/* ══════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════ */
+footer {
+  background: #260134;
+  padding: 64px 80px 40px;
+}
+
+.footer-logo {
+  height: 52px; width: auto; display: block; margin-bottom: 14px;
+}
+
+.footer-tagline {
+  font-size: 12px; font-weight: 300; color: rgba(226,197,243,0.4);
+  max-width: 220px; line-height: 1.7;
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 48px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid rgba(226,197,243,0.07);
+}
+
+.footer-col-head {
+  font-size: 9px; font-weight: 600; letter-spacing: 0.32em;
+  text-transform: uppercase; color: rgba(226,197,243,0.3);
+  margin-bottom: 16px;
+}
+
+.footer-links {
+  list-style: none;
+  display: flex; flex-direction: column; gap: 10px;
+}
+
+.footer-links a {
+  font-size: 12px; font-weight: 300;
+  color: rgba(226,197,243,0.5);
+  text-decoration: none; transition: color 0.2s;
+}
+
+.footer-links a:hover { color: rgba(226,197,243,0.9); }
+
+.footer-bottom {
+  padding-top: 24px;
+}
+
+.footer-copy {
+  font-size: 11px; color: rgba(226,197,243,0.2);
+  letter-spacing: 0.04em;
+}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .services-grid { grid-template-columns: 1fr 1fr; }
+  .hero-heading  { font-size: 44px; }
+}
+
+@media (max-width: 768px) {
+  nav            { padding: 0 24px; }
+  .nav-links     { display: none; }
+  .hero          { padding: 120px 28px 72px; }
+  .hero-heading  { font-size: 36px; }
+  .intro-strip   { flex-direction: column; padding: 48px 28px; gap: 36px; }
+  .intro-count-row { justify-content: center; }
+  .services-section { padding: 64px 28px; }
+  .services-grid { grid-template-columns: 1fr; }
+  .cta-band      { flex-direction: column; padding: 56px 28px; }
+  .cta-band-heading { font-size: 28px; }
+  .cta-band-actions { flex-direction: column; width: 100%; }
+  .btn-primary, .btn-ghost { text-align: center; }
+  footer         { padding: 48px 28px 28px; }
+  .footer-top    { grid-template-columns: 1fr; gap: 32px; }
+  .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     NAV
+══════════════════════════════════════ -->
+<nav>
+  <div class="nav-brand">
+    <a href="index.html"><img src="images/logo.png" alt="Resync Virtual Assistance" class="nav-logo"></a>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="services.html" class="active">Services</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="#" data-booking-link class="nav-cta">Book a Discovery Call</a></li>
+  </ul>
+</nav>
+
+
+
+
+
+<!-- ══════════════════════════════════════
+     SERVICES GRID
+══════════════════════════════════════ -->
+<section class="services-section">
+  <div class="services-section-inner">
+
+    <span class="sec-tag" style="color: var(--purple); opacity: 0.45;">Service lines</span>
+    <h2 style="font-family: var(--serif); font-size: 36px; font-weight: 400; color: var(--plum); line-height: 1.2; max-width: 480px;">
+      Everything that keeps your finances running.
+    </h2>
+
+    <div class="services-grid">
+
+      <!-- 01 Bookkeeping -->
+      <div class="svc-card">
+        <span class="svc-num">01</span>
+        <span class="svc-tag">Core service</span>
+        <h3 class="svc-title">Bookkeeping &amp; Bank Reconciliations</h3>
+        <div class="svc-rule"></div>
+        <ul class="svc-list">
+          <li class="svc-item"><span class="svc-dot"></span>Transaction coding &amp; data entry</li>
+          <li class="svc-item"><span class="svc-dot"></span>Bank &amp; credit card reconciliations</li>
+          <li class="svc-item"><span class="svc-dot"></span>Accounts payable</li>
+          <li class="svc-item"><span class="svc-dot"></span>Accounts receivable</li>
+          <li class="svc-item"><span class="svc-dot"></span>Receipt and document management</li>
+          <li class="svc-item"><span class="svc-dot"></span>Catch up &amp; clean-up bookkeeping</li>
+        </ul>
+      </div>
+
+      <!-- 02 Financial Reporting -->
+      <div class="svc-card">
+        <span class="svc-num">02</span>
+        <span class="svc-tag">Core service</span>
+        <h3 class="svc-title">Financial Reporting &amp; Advisory</h3>
+        <div class="svc-rule"></div>
+        <ul class="svc-list">
+          <li class="svc-item"><span class="svc-dot"></span>Monthly management reports</li>
+          <li class="svc-item"><span class="svc-dot"></span>Profit &amp; loss, balance sheet, cashflow statements</li>
+          <li class="svc-item"><span class="svc-dot"></span>End-of-month and EOFY reporting</li>
+          <li class="svc-item"><span class="svc-dot"></span>Cashflow forecasting and management</li>
+          <li class="svc-item"><span class="svc-dot"></span>Budgeting and variance analysis</li>
+          <li class="svc-item"><span class="svc-dot"></span>Liaison with external tax agents and auditors</li>
+        </ul>
+      </div>
+
+      <!-- 03 Payroll -->
+      <div class="svc-card">
+        <span class="svc-num">03</span>
+        <span class="svc-tag">Core service</span>
+        <h3 class="svc-title">Payroll Processing &amp; Compliance</h3>
+        <div class="svc-rule"></div>
+        <ul class="svc-list">
+          <li class="svc-item"><span class="svc-dot"></span>Weekly, fortnightly, and monthly pay runs</li>
+          <li class="svc-item"><span class="svc-dot"></span>New employee setup and onboarding</li>
+          <li class="svc-item"><span class="svc-dot"></span>Superannuation processing and reconciliation</li>
+          <li class="svc-item"><span class="svc-dot"></span>Leave and entitlement tracking</li>
+          <li class="svc-item"><span class="svc-dot"></span>Single Touch Payroll (STP) filings</li>
+          <li class="svc-item"><span class="svc-dot"></span>Award interpretation support</li>
+          <li class="svc-item"><span class="svc-dot"></span>Payroll compliance reviews</li>
+        </ul>
+      </div>
+
+      <!-- 04 Admin & Compliance -->
+      <div class="svc-card">
+        <span class="svc-num">04</span>
+        <span class="svc-tag">Core service</span>
+        <h3 class="svc-title">Admin &amp; Compliance Support</h3>
+        <div class="svc-rule"></div>
+        <ul class="svc-list">
+          <li class="svc-item"><span class="svc-dot"></span>BAS and IAS review and preparation</li>
+          <li class="svc-item"><span class="svc-dot"></span>GST reconciliation</li>
+          <li class="svc-item"><span class="svc-dot"></span>STP finalisation</li>
+          <li class="svc-item"><span class="svc-dot"></span>WorkCover declarations</li>
+          <li class="svc-item"><span class="svc-dot"></span>Invoicing and expense tracking</li>
+        </ul>
+      </div>
+
+      <!-- 05 Software -->
+      <div class="svc-card">
+        <span class="svc-num">05</span>
+        <span class="svc-tag">Core service</span>
+        <h3 class="svc-title">Software Setup &amp; Support</h3>
+        <div class="svc-rule"></div>
+        <ul class="svc-list">
+          <li class="svc-item"><span class="svc-dot"></span>Xero and MYOB setup and configuration</li>
+          <li class="svc-item"><span class="svc-dot"></span>Xero migration from other platforms</li>
+          <li class="svc-item"><span class="svc-dot"></span>Chart of accounts setup</li>
+          <li class="svc-item"><span class="svc-dot"></span>Third-party app integration and processing</li>
+          <li class="svc-item"><span class="svc-dot"></span>Ongoing software support as you grow</li>
+        </ul>
+      </div>
+
+      <!-- 06 Staffing — always dark -->
+      <div class="svc-card is-dark">
+        <span class="svc-num">06</span>
+        <span class="svc-tag">Staffing service</span>
+        <h3 class="svc-title">Staffing &amp; Recruitment</h3>
+        <div class="svc-rule"></div>
+        <ul class="svc-list">
+          <li class="svc-item"><span class="svc-dot"></span>End-to-end recruitment: sourcing, screening, and shortlisting</li>
+          <li class="svc-item"><span class="svc-dot"></span>Finance-specific competency assessments</li>
+          <li class="svc-item"><span class="svc-dot"></span>Reference checks and candidate onboarding support</li>
+          <li class="svc-item"><span class="svc-dot"></span>Candidate matched to your tools, industry, and workflow</li>
+          <li class="svc-item"><span class="svc-dot"></span>Timesheet oversight</li>
+          <li class="svc-item"><span class="svc-dot"></span>Ongoing staff performance check-ins and management</li>
+          <li class="svc-item"><span class="svc-dot"></span>14-business-day replacement guarantee</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     CTA BAND
+══════════════════════════════════════ -->
+<section class="cta-band">
+  <div class="cta-band-text">
+    <span class="cta-band-tag">Ready to get started?</span>
+    <h2 class="cta-band-heading">
+      Let's talk about what your business actually needs.
+    </h2>
+  </div>
+  <div class="cta-band-actions">
+    <a href="#" data-booking-link class="btn-primary">
+      Book a free discovery call
+    </a>
+    <a href="pricing.html" class="btn-ghost">
+      View pricing
+    </a>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     FOOTER
+══════════════════════════════════════ -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <img src="images/logo-footer.png" alt="Resync Virtual Assistance" class="footer-logo">
+      <p class="footer-tagline">Trusted bookkeeping and finance admin support for growing Australian businesses.</p>
+    </div>
+    <div>
+      <div class="footer-col-head">Quick Links</div>
+      <ul class="footer-links">
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#how">How We Work</a></li>
+        <li><a href="index.html#faq">FAQs</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-head">Get in Touch</div>
+      <ul class="footer-links">
+        <li><a href="#" data-booking-link>Book a Discovery Call</a></li>
+        <li><a href="mailto:hello@resyncva.com">Email: hello@resyncva.com</a></li>
+        <li><a href="#" data-whatsapp-link>WhatsApp</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 Resync Virtual Assistance Services · resyncva.com</div>
+  </div>
+</footer>
+
+  <script src="config.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

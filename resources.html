@@ -228,6 +228,10 @@
     .admin-bar p { font-size: 10px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: var(--lav); }
     .admin-bar a { color: var(--mid); cursor: pointer; text-decoration: underline; }
 
+    /* ── SCROLL FADE-IN ── */
+    .fade-item { opacity: 0; transform: translateY(20px); }
+    .fade-item.visible { opacity: 1; transform: translateY(0); }
+
     /* ── MOBILE NAV OVERLAY ── */
     .nav-overlay {
       display: none; position: fixed; inset: 0;

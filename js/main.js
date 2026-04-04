@@ -49,7 +49,9 @@ const FADE_SELECTORS = [
   '.svc-card', '.intro-strip', '.cta-band-text', '.cta-band-actions',
   '.sec-tag', '.svc-section-heading',
   // pricing.html
-  '.tier-card', '.addon-card'
+  '.tier-card', '.addon-card',
+  // resources.html
+  '.stat', '.trust-item'
 ].join(', ');
 
 const FADE_DURATION = 700; // ms — match this with the CSS transition duration

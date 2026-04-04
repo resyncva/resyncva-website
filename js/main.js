@@ -44,7 +44,9 @@ const FADE_SELECTORS = [
   '.testi-card', '.faq-item', '.faq-cta-head', '.faq-cta-body', '.faq-cta .btn-dark',
   '.about-left', '.about-right', '.pricing-card',
   '.hero-badge', '.hero-headline', '.hero-sub', '.hero-cta', '.hero-visual',
-  '.who-nudge'
+  '.who-nudge',
+  // services.html
+  '.svc-card', '.intro-strip', '.cta-band-text', '.cta-band-actions'
 ].join(', ');
 
 const FADE_DURATION = 700; // ms — match this with the CSS transition duration

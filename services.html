@@ -455,6 +455,16 @@ footer {
   letter-spacing: 0.04em;
 }
 
+/* ── SCROLL FADE-IN ── */
+.fade-item {
+  opacity: 0;
+  transform: translateY(20px);
+}
+.fade-item.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* ── MOBILE NAV OVERLAY ── */
 .nav-overlay {
   display: none; position: fixed; inset: 0;

@@ -47,7 +47,9 @@ const FADE_SELECTORS = [
   '.who-nudge',
   // services.html
   '.svc-card', '.intro-strip', '.cta-band-text', '.cta-band-actions',
-  '.sec-tag', '.svc-section-heading'
+  '.sec-tag', '.svc-section-heading',
+  // pricing.html
+  '.tier-card', '.addon-card'
 ].join(', ');
 
 const FADE_DURATION = 700; // ms — match this with the CSS transition duration

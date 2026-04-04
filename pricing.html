@@ -329,6 +329,10 @@ footer { background: #260134; padding: 64px 80px 40px; }
   max-width: 400px; margin-top: 24px;
 }
 
+/* ── SCROLL FADE-IN ── */
+.fade-item { opacity: 0; transform: translateY(20px); }
+.fade-item.visible { opacity: 1; transform: translateY(0); }
+
 /* ── MOBILE NAV OVERLAY ── */
 .nav-overlay {
   display: none; position: fixed; inset: 0;

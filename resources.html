@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resync Academy — Australian Bookkeeping & Payroll Courses</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --plum:   #260134;
+      --purple: #44095b;
+      --lav:    #e2c5f3;
+      --white:  #ffffff;
+      --light:  #f7f0fc;
+      --mid:    #c89ee0;
+      --ink:    #1a0124;
+      --serif:  'Playfair Display', Georgia, serif;
+      --sans:   'Montserrat', Arial, sans-serif;
+      --radius: 14px;
+      --shadow: 0 4px 24px rgba(38,1,52,0.10);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--light); color: var(--ink); overflow-x: hidden; padding-top: 64px; }
+
+    /* ─────────────────── NAV ─────────────────── */
+    nav { background: var(--purple); padding: 0 56px; height: 64px; display: flex; align-items: center; justify-content: space-between; position: fixed; top: 0; left: 0; right: 0; z-index: 100; }
+    .nav-brand a { display: block; }
+    .nav-logo { height: 50px; width: auto; display: block; }
+    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .nav-links a { font-size: 10.5px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(226,197,243,0.58); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--lav); }
+    .nav-cta { font-size: 10px !important; font-weight: 600 !important; color: var(--purple) !important; background: var(--lav); padding: 9px 20px !important; border-radius: 2px; letter-spacing: 0.1em !important; text-decoration: none; }
+    .nav-cta:hover { opacity: 0.88; }
+
+    /* ─────────────────── FOOTER ─────────────────── */
+    footer { background: #260134; padding: 64px 80px 40px; }
+    .footer-logo { height: 52px; width: auto; display: block; margin-bottom: 14px; }
+    .footer-tagline { font-size: 12px; font-weight: 300; color: rgba(226,197,243,0.4); max-width: 220px; line-height: 1.7; }
+    .footer-top { display: grid; grid-template-columns: 1fr auto auto; gap: 48px; padding-bottom: 40px; border-bottom: 1px solid rgba(226,197,243,0.07); }
+    .footer-col-head { font-size: 9px; font-weight: 600; letter-spacing: 0.32em; text-transform: uppercase; color: rgba(226,197,243,0.3); margin-bottom: 16px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 12px; font-weight: 300; color: rgba(226,197,243,0.5); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: rgba(226,197,243,0.9); }
+    .footer-bottom { padding-top: 24px; }
+    .footer-copy { font-size: 11px; color: rgba(226,197,243,0.2); letter-spacing: 0.04em; }
+
+    .btn-admin { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--lav); background: rgba(226,197,243,0.12); border: 1px solid rgba(226,197,243,0.2); padding: 8px 18px; border-radius: 6px; cursor: pointer; transition: all 0.18s; }
+    .btn-admin:hover { background: rgba(226,197,243,0.2); }
+
+    /* ─────────────────── HERO ─────────────────── */
+    .hero {
+      background: var(--plum);
+      padding: 72px 48px 68px;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+    .hero::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(rgba(226,197,243,0.04) 1px, transparent 1px); background-size: 28px 28px; }
+    .hero::after { content: ''; position: absolute; width: 700px; height: 700px; border-radius: 50%; background: radial-gradient(circle, rgba(68,9,91,0.55) 0%, transparent 65%); left: 50%; top: 50%; transform: translate(-50%,-50%); pointer-events: none; }
+
+    .hero-body { position: relative; z-index: 2; max-width: 680px; margin: 0 auto; animation: fadeUp 0.9s cubic-bezier(.16,1,.3,1) both; }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; font-size: 9px; font-weight: 600; letter-spacing: 0.42em; text-transform: uppercase; color: rgba(226,197,243,0.38); border: 1px solid rgba(226,197,243,0.12); padding: 8px 18px; border-radius: 20px; margin-bottom: 28px; }
+
+    .hero h1 { font-family: var(--serif); font-size: clamp(32px, 4vw, 52px); font-weight: 400; color: var(--lav); line-height: 1.15; letter-spacing: 0.01em; margin-bottom: 16px; }
+    .hero h1 em { font-style: italic; color: rgba(226,197,243,0.55); }
+
+    .hero-rule { width: 60px; height: 1px; background: linear-gradient(90deg, transparent, rgba(226,197,243,0.25), transparent); margin: 0 auto 18px; }
+
+    .hero p { font-size: 13.5px; font-weight: 300; line-height: 1.9; color: rgba(226,197,243,0.48); max-width: 520px; margin: 0 auto 32px; }
+
+    .hero-pills { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+    .hero-pill { font-size: 11px; font-weight: 500; letter-spacing: 0.05em; padding: 7px 18px; border-radius: 30px; border: 1px solid rgba(226,197,243,0.15); color: rgba(226,197,243,0.5); }
+
+    /* ─────────────────── STATS ─────────────────── */
+    .stats-band { background: var(--purple); border-bottom: 1px solid rgba(226,197,243,0.07); }
+    .stats { max-width: 1040px; margin: 0 auto; padding: 18px 48px; display: flex; gap: 0; justify-content: center; }
+    .stat { display: flex; align-items: center; gap: 12px; padding: 0 40px; border-right: 1px solid rgba(226,197,243,0.1); }
+    .stat:last-child { border-right: none; }
+    .stat-num { font-family: var(--serif); font-size: 24px; color: var(--lav); line-height: 1; }
+    .stat-label { font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(226,197,243,0.4); }
+
+    /* ─────────────────── TOOLBAR ─────────────────── */
+    .toolbar { max-width: 1040px; margin: 0 auto; padding: 36px 48px 22px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+    .section-heading { font-family: var(--serif); font-size: 22px; font-weight: 400; color: var(--plum); }
+    .section-sub { font-size: 12px; font-weight: 300; color: rgba(38,1,52,0.45); margin-top: 3px; letter-spacing: 0.02em; }
+
+    .toolbar-right { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+    .search-wrap { position: relative; }
+    .search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--mid); width: 14px; height: 14px; }
+    .search-wrap input { padding: 9px 14px 9px 36px; border: 1px solid rgba(68,9,91,0.2); border-radius: 8px; font-family: var(--sans); font-size: 12px; background: var(--white); color: var(--ink); outline: none; transition: border-color 0.2s, box-shadow 0.2s; width: 200px; }
+    .search-wrap input::placeholder { color: rgba(68,9,91,0.35); }
+    .search-wrap input:focus { border-color: var(--purple); box-shadow: 0 0 0 3px rgba(68,9,91,0.08); }
+
+    .filter-pills { display: flex; gap: 7px; flex-wrap: wrap; }
+    .pill { font-size: 11px; font-weight: 500; letter-spacing: 0.05em; padding: 7px 16px; border-radius: 30px; border: 1px solid rgba(68,9,91,0.18); background: var(--white); color: rgba(38,1,52,0.5); cursor: pointer; transition: all 0.18s; user-select: none; }
+    .pill:hover { border-color: var(--purple); color: var(--purple); }
+    .pill.active { background: var(--plum); color: var(--lav); border-color: var(--plum); }
+
+    /* ADMIN-only add button, hidden by default */
+    .btn-add { display: none; align-items: center; gap: 7px; background: var(--plum); color: var(--lav); font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 10px 22px; border-radius: 8px; border: 1px solid rgba(226,197,243,0.15); cursor: pointer; transition: background 0.18s, transform 0.12s; white-space: nowrap; }
+    .btn-add:hover { background: var(--purple); transform: translateY(-1px); }
+    body.admin-mode .btn-add { display: inline-flex; }
+
+    /* ─────────────────── GRID ─────────────────── */
+    .grid { max-width: 1040px; margin: 0 auto; padding: 0 48px 80px; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 22px; }
+
+    /* ─────────────────── CARD ─────────────────── */
+    .card { background: var(--white); border: 1px solid rgba(68,9,91,0.1); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); display: flex; flex-direction: column; transition: transform 0.22s, box-shadow 0.22s; animation: fadeUp 0.5s ease both; }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 14px 40px rgba(38,1,52,0.14); }
+    .card:nth-child(1) { animation-delay: 0.05s; }
+    .card:nth-child(2) { animation-delay: 0.12s; }
+    .card:nth-child(3) { animation-delay: 0.19s; }
+
+    .card-stripe { height: 4px; background: linear-gradient(90deg, var(--plum), var(--purple)); }
+
+    .card-header { padding: 24px 24px 14px; display: flex; align-items: flex-start; gap: 14px; }
+    .card-icon { width: 46px; height: 46px; border-radius: 10px; background: var(--light); border: 1px solid rgba(68,9,91,0.1); display: flex; align-items: center; justify-content: center; font-size: 21px; flex-shrink: 0; }
+    .card-meta { flex: 1; }
+    .card-category { font-size: 9px; font-weight: 600; letter-spacing: 0.38em; text-transform: uppercase; color: rgba(68,9,91,0.45); margin-bottom: 4px; }
+    .card-title { font-family: var(--serif); font-size: 20px; font-weight: 400; color: var(--plum); line-height: 1.2; }
+
+    .card-body { padding: 0 24px 18px; flex: 1; display: flex; flex-direction: column; }
+    .card-desc { font-size: 12.5px; font-weight: 300; color: rgba(38,1,52,0.6); line-height: 1.85; margin-bottom: 14px; }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+    .tag { background: var(--light); color: var(--purple); font-size: 10.5px; font-weight: 500; letter-spacing: 0.04em; padding: 4px 11px; border-radius: 30px; border: 1px solid rgba(68,9,91,0.1); }
+
+    .modules-list { border-top: 1px solid rgba(68,9,91,0.07); padding-top: 14px; margin-bottom: 16px; }
+    .modules-label { font-size: 9px; font-weight: 600; letter-spacing: 0.35em; text-transform: uppercase; color: rgba(68,9,91,0.35); margin-bottom: 9px; }
+    .module-item { display: flex; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 300; color: rgba(38,1,52,0.7); padding: 3.5px 0; }
+    .module-item::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--mid); flex-shrink: 0; }
+    .module-more { font-size: 11px; font-weight: 500; color: var(--purple); padding: 4px 0 0 13px; opacity: 0.6; }
+
+    /* PRICE BLOCK */
+    .price-block { margin-top: auto; background: var(--light); border: 1px solid rgba(68,9,91,0.08); border-radius: 10px; padding: 14px 16px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 0; }
+    .price-label { font-size: 9px; font-weight: 600; letter-spacing: 0.35em; text-transform: uppercase; color: rgba(68,9,91,0.4); margin-bottom: 4px; }
+    .price-amount { font-family: var(--serif); font-size: 26px; color: var(--plum); line-height: 1; }
+    .price-amount span { font-family: var(--sans); font-size: 12px; font-weight: 500; color: rgba(38,1,52,0.45); margin-left: 3px; }
+    .price-note { font-size: 10px; font-weight: 300; color: rgba(38,1,52,0.4); margin-top: 2px; }
+    .price-right { text-align: right; }
+    .modules-count { font-family: var(--serif); font-size: 22px; color: var(--purple); line-height: 1; }
+    .modules-count-label { font-size: 9px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(68,9,91,0.38); margin-top: 2px; }
+
+    /* CARD FOOTER */
+    .card-footer { padding: 16px 24px 22px; display: flex; flex-direction: column; gap: 9px; border-top: 1px solid rgba(68,9,91,0.06); }
+
+    .btn-enrol { width: 100%; text-align: center; padding: 11px 18px; background: var(--plum); color: var(--lav); font-family: var(--sans); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; border: none; border-radius: 8px; cursor: pointer; text-decoration: none; transition: background 0.18s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .btn-enrol:hover { background: var(--purple); }
+
+    .btn-download { width: 100%; text-align: center; padding: 9px 18px; background: transparent; color: var(--purple); font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid rgba(68,9,91,0.2); border-radius: 8px; cursor: pointer; text-decoration: none; transition: all 0.18s; display: flex; align-items: center; justify-content: center; gap: 7px; }
+    .btn-download:hover { border-color: var(--purple); background: rgba(68,9,91,0.04); }
+    .btn-download svg, .btn-enrol svg { width: 13px; height: 13px; flex-shrink: 0; }
+
+    /* No PDF state */
+    .btn-download.no-pdf { opacity: 0.38; pointer-events: none; cursor: default; border-style: dashed; }
+
+    /* Admin-only edit row */
+    .card-admin-row { display: none; gap: 8px; padding: 0 24px 18px; }
+    body.admin-mode .card-admin-row { display: flex; }
+    .btn-edit-card { flex: 1; padding: 8px; background: transparent; color: rgba(68,9,91,0.45); font-family: var(--sans); font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid rgba(68,9,91,0.15); border-radius: 7px; cursor: pointer; transition: all 0.18s; display: flex; align-items: center; justify-content: center; gap: 5px; }
+    .btn-edit-card:hover { border-color: var(--purple); color: var(--purple); }
+    .btn-delete-card { padding: 8px 12px; background: transparent; color: rgba(200,50,50,0.45); border: 1px solid rgba(200,50,50,0.18); border-radius: 7px; cursor: pointer; transition: all 0.18s; display: flex; align-items: center; }
+    .btn-delete-card:hover { border-color: #c03232; color: #c03232; }
+
+    /* ADD CARD — admin only */
+    .card-add { border: 2px dashed rgba(68,9,91,0.18); background: transparent; box-shadow: none; align-items: center; justify-content: center; padding: 44px 26px; gap: 14px; cursor: pointer; min-height: 260px; transition: border-color 0.2s, background 0.2s; display: none; flex-direction: column; }
+    body.admin-mode .card-add { display: flex; }
+    .card-add:hover { border-color: var(--purple); background: rgba(68,9,91,0.03); transform: none; box-shadow: none; }
+    .add-circle { width: 52px; height: 52px; background: var(--light); border: 1px solid rgba(68,9,91,0.12); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; color: var(--purple); font-weight: 300; transition: background 0.2s; }
+    .card-add:hover .add-circle { background: rgba(68,9,91,0.08); }
+    .card-add h3 { font-family: var(--serif); font-size: 18px; font-weight: 400; color: var(--plum); text-align: center; }
+    .card-add p { font-size: 12px; font-weight: 300; color: rgba(38,1,52,0.45); text-align: center; line-height: 1.75; max-width: 200px; }
+
+    /* ─────────────────── MODAL BASE ─────────────────── */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(26,1,36,0.62); backdrop-filter: blur(5px); z-index: 200; display: flex; align-items: center; justify-content: center; padding: 20px; opacity: 0; pointer-events: none; transition: opacity 0.22s; }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal { background: var(--white); border-radius: 18px; width: 100%; max-width: 520px; padding: 40px; box-shadow: 0 32px 80px rgba(26,1,36,0.28); transform: translateY(22px) scale(0.97); transition: transform 0.3s cubic-bezier(.16,1,.3,1); border-top: 4px solid var(--plum); }
+    .modal-overlay.open .modal { transform: translateY(0) scale(1); }
+    .modal-eyebrow { font-size: 9px; font-weight: 600; letter-spacing: 0.38em; text-transform: uppercase; color: rgba(68,9,91,0.4); margin-bottom: 6px; }
+    .modal h2 { font-family: var(--serif); font-size: 26px; font-weight: 400; color: var(--plum); margin-bottom: 22px; }
+
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 9px; font-weight: 600; letter-spacing: 0.35em; text-transform: uppercase; color: rgba(38,1,52,0.45); margin-bottom: 7px; }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px 14px; border: 1px solid rgba(68,9,91,0.18); border-radius: 8px; font-family: var(--sans); font-size: 13px; font-weight: 300; color: var(--ink); background: var(--light); outline: none; transition: border-color 0.2s, box-shadow 0.2s; }
+    .form-group textarea { resize: vertical; min-height: 72px; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--purple); box-shadow: 0 0 0 3px rgba(68,9,91,0.08); background: var(--white); }
+    .form-hint { font-size: 10.5px; font-weight: 300; color: rgba(38,1,52,0.42); margin-top: 5px; line-height: 1.6; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+    .modal-divider { height: 1px; background: rgba(68,9,91,0.08); margin: 20px 0; }
+
+    .modal-section-label { font-size: 9px; font-weight: 600; letter-spacing: 0.38em; text-transform: uppercase; color: rgba(68,9,91,0.35); margin-bottom: 14px; }
+
+    .modal-actions { display: flex; gap: 10px; margin-top: 26px; }
+    .btn-cancel { flex: 1; padding: 11px; background: transparent; border: 1px solid rgba(68,9,91,0.18); border-radius: 8px; font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(38,1,52,0.45); cursor: pointer; transition: all 0.18s; }
+    .btn-cancel:hover { border-color: var(--plum); color: var(--plum); }
+    .btn-save { flex: 2; padding: 11px; background: var(--plum); border: none; border-radius: 8px; font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lav); cursor: pointer; transition: background 0.18s; }
+    .btn-save:hover { background: var(--purple); }
+
+    /* ─────────────────── DOWNLOAD MODAL ─────────────────── */
+    #downloadModal .modal { max-width: 420px; text-align: center; }
+    .download-icon { font-size: 40px; margin-bottom: 16px; }
+    #downloadModal h2 { font-size: 22px; margin-bottom: 8px; }
+    #downloadModal p { font-size: 13px; font-weight: 300; color: rgba(38,1,52,0.55); line-height: 1.8; margin-bottom: 24px; }
+    .btn-download-confirm { width: 100%; padding: 13px; background: var(--plum); border: none; border-radius: 9px; font-family: var(--sans); font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lav); cursor: pointer; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px; transition: background 0.18s; margin-bottom: 10px; }
+    .btn-download-confirm:hover { background: var(--purple); }
+    .btn-download-close { width: 100%; padding: 10px; background: transparent; border: 1px solid rgba(68,9,91,0.18); border-radius: 9px; font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(38,1,52,0.45); cursor: pointer; transition: all 0.18s; }
+    .btn-download-close:hover { border-color: var(--plum); color: var(--plum); }
+
+    /* ─────────────────── TRUST BAR ─────────────────── */
+    .trust-bar { background: var(--white); border-top: 1px solid rgba(68,9,91,0.07); border-bottom: 1px solid rgba(68,9,91,0.07); }
+    .trust-inner { max-width: 1040px; margin: 0 auto; padding: 18px 48px; display: flex; align-items: center; justify-content: center; gap: 36px; flex-wrap: wrap; }
+    .trust-item { display: flex; align-items: center; gap: 8px; font-size: 11.5px; font-weight: 500; color: rgba(38,1,52,0.55); letter-spacing: 0.02em; }
+    .trust-icon { font-size: 16px; }
+
+
+    /* ─────────────────── ADMIN MODE INDICATOR ─────────────────── */
+    .admin-bar { display: none; background: rgba(68,9,91,0.9); padding: 8px 48px; text-align: center; }
+    body.admin-mode .admin-bar { display: block; }
+    .admin-bar p { font-size: 10px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: var(--lav); }
+    .admin-bar a { color: var(--mid); cursor: pointer; text-decoration: underline; }
+
+    /* ─────────────────── RESPONSIVE ─────────────────── */
+    @media (max-width: 680px) {
+      header, .hero { padding-left: 20px; padding-right: 20px; }
+      .stats { padding: 14px 20px; flex-wrap: wrap; gap: 14px; }
+      .stat { border-right: none; padding: 0; }
+      .toolbar, .grid { padding-left: 20px; padding-right: 20px; }
+      .trust-inner { padding: 14px 20px; gap: 20px; }
+      footer { padding: 22px 20px; }
+      .form-row { grid-template-columns: 1fr; }
+      .header-link { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ADMIN BAR -->
+<div class="admin-bar">
+  <p>⚙ Admin Mode — you can add, edit and delete courses &nbsp;·&nbsp; <a onclick="toggleAdmin()">Exit Admin Mode</a></p>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">
+    <a href="index.html"><img src="images/logo.png" alt="Resync Virtual Assistance" class="nav-logo"></a>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="resources.html" class="active">Resources</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="#" data-booking-link class="nav-cta">Book a Discovery Call</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-body">
+    <h1>Learn Australian<br><em>Bookkeeping & Payroll</em></h1>
+    <div class="hero-rule"></div>
+    <p>Practical, self-paced resources built specifically for Filipino VAs and remote workers supporting Australian businesses. Purchase once and get a downloadable PDF you keep forever.</p>
+    <div class="hero-pills">
+      <div class="hero-pill">🇦🇺 AU Compliance</div>
+      <div class="hero-pill">🕐 Self-Paced</div>
+      <div class="hero-pill">✦ Expert-Led</div>
+      <div class="hero-pill">♾️ Yours to Keep</div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-band">
+  <div class="stats">
+    <div class="stat"><div><div class="stat-num" id="stat-courses">2</div><div class="stat-label">Resources Available</div></div></div>
+    <div class="stat"><div><div class="stat-num">20</div><div class="stat-label">Modules Total</div></div></div>
+    <div class="stat"><div><div class="stat-num">11+</div><div class="stat-label">Years Experience</div></div></div>
+  </div>
+</div>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-inner">
+    <div class="trust-item"><span class="trust-icon">🔒</span> Secure purchase</div>
+    <div class="trust-item"><span class="trust-icon">♾️</span> Yours to keep</div>
+    <div class="trust-item"><span class="trust-icon">🇦🇺</span> AU-specific content</div>
+    <div class="trust-item"><span class="trust-icon">💬</span> Built for Filipino VAs</div>
+  </div>
+</div>
+
+<!-- TOOLBAR -->
+<div class="toolbar">
+  <div>
+    <div class="section-heading">All Courses</div>
+  </div>
+  <div class="toolbar-right">
+    <button class="btn-add" onclick="openModal()">
+      <svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10 4v12M4 10h12"/></svg>
+      Add Course
+    </button>
+  </div>
+</div>
+
+<!-- GRID -->
+<div class="grid" id="courseGrid">
+
+  <!-- CARD 1: Bookkeeping -->
+  <div class="card" data-tags="bookkeeping compliance" data-title="australian bookkeeping">
+    <div class="card-stripe"></div>
+    <div class="card-header">
+      <div class="card-icon">📒</div>
+      <div class="card-meta">
+        <div class="card-category">Bookkeeping</div>
+        <div class="card-title">Australian Bookkeeping</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p class="card-desc">A complete program covering AU bookkeeping fundamentals, GST, tax codes, payroll, superannuation, and accounts management for Australian businesses.</p>
+      <div class="modules-list">
+        <div class="modules-label">What's Inside</div>
+        <div class="module-item">Module 1 – Introduction to Australian Bookkeeping</div>
+        <div class="module-item">Module 2 – Accounting & Bookkeeping Fundamentals</div>
+        <div class="module-item">Module 3 – Payroll & Superannuation</div>
+        <div class="module-item">Module 4 – GST & Tax Codes</div>
+        <div class="module-item">Module 5 – Accounts Payable & Receivable</div>
+        <div class="module-more">+ 5 more modules</div>
+      </div>
+      <div class="price-block">
+        <div>
+          <div class="price-amount">₱149<span>PHP</span></div>
+          <div class="price-note">One-time payment · PDF included</div>
+        </div>
+        <div class="price-right">
+          <div class="modules-count">10</div>
+          <div class="modules-count-label">Modules</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSef71Kce5l7ChwB_2Wyqi6t7M4gsUVaOZFRDzIBhUvhGll90g/viewform?usp=header" target="_blank" class="btn-enrol">
+
+        Get This Resource
+      </a>
+    </div>
+    <div class="card-admin-row">
+      <button class="btn-edit-card" onclick="editCard(this)">
+        <svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 3.3a1.5 1.5 0 0 1 2 2L6 16 2 18l2-4L14.7 3.3z"/></svg>
+        Edit
+      </button>
+      <button class="btn-delete-card" onclick="deleteCard(this)" title="Delete course">
+        <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h14M8 6V4h4v2M19 6l-1 12H2L1 6"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- CARD 2: Payroll -->
+  <div class="card" data-tags="payroll compliance" data-title="australian payroll">
+    <div class="card-stripe"></div>
+    <div class="card-header">
+      <div class="card-icon">💼</div>
+      <div class="card-meta">
+        <div class="card-category">Payroll</div>
+        <div class="card-title">Australian Payroll</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p class="card-desc">A comprehensive program covering employee types, wages, PAYG withholding, superannuation, STP reporting, and leave management for AU payroll.</p>
+      <div class="modules-list">
+        <div class="modules-label">What's Inside</div>
+        <div class="module-item">Module 1 – Introduction to Australian Payroll</div>
+        <div class="module-item">Module 2 – Understanding Employee Types</div>
+        <div class="module-item">Module 3 – Wages, Allowances & Deductions</div>
+        <div class="module-item">Module 4 – PAYG Withholding</div>
+        <div class="module-item">Module 5 – Superannuation (Super)</div>
+        <div class="module-more">+ 5 more modules</div>
+      </div>
+      <div class="price-block">
+        <div>
+          <div class="price-amount">₱149<span>PHP</span></div>
+          <div class="price-note">One-time payment · PDF included</div>
+        </div>
+        <div class="price-right">
+          <div class="modules-count">10</div>
+          <div class="modules-count-label">Modules</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSef71Kce5l7ChwB_2Wyqi6t7M4gsUVaOZFRDzIBhUvhGll90g/viewform?usp=header" target="_blank" class="btn-enrol">
+
+        Get This Resource
+      </a>
+    </div>
+    <div class="card-admin-row">
+      <button class="btn-edit-card" onclick="editCard(this)">
+        <svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 3.3a1.5 1.5 0 0 1 2 2L6 16 2 18l2-4L14.7 3.3z"/></svg>
+        Edit
+      </button>
+      <button class="btn-delete-card" onclick="deleteCard(this)" title="Delete course">
+        <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h14M8 6V4h4v2M19 6l-1 12H2L1 6"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- ADD CARD (admin only) -->
+  <div class="card card-add" onclick="openModal()">
+    <div class="add-circle">＋</div>
+    <h3>Add a New Course</h3>
+    <p>Set a price, link a PDF, and publish a new course.</p>
+  </div>
+
+</div>
+
+<!-- ── MODAL: ADD / EDIT COURSE ── -->
+<div class="modal-overlay" id="courseModal" onclick="closeOnOverlay(event, 'courseModal')">
+  <div class="modal">
+    <div class="modal-eyebrow">Resync Academy</div>
+    <h2 id="modalHeading">Add New Course</h2>
+
+    <div class="form-group">
+      <label>Course Title</label>
+      <input type="text" id="newTitle" placeholder="e.g. Xero Intermediate" />
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Category</label>
+        <select id="newCategory">
+          <option value="">Select…</option>
+          <option value="bookkeeping">Bookkeeping</option>
+          <option value="payroll">Payroll</option>
+          <option value="compliance">Compliance</option>
+          <option value="software">Software</option>
+          <option value="admin">Admin & VA</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>No. of Modules</label>
+        <input type="number" id="newModules" placeholder="e.g. 10" min="1" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Description</label>
+      <textarea id="newDesc" placeholder="Brief overview of what this course covers…"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Tags (comma-separated)</label>
+      <input type="text" id="newTags" placeholder="e.g. Xero, GST, BAS" />
+    </div>
+
+    <div class="modal-divider"></div>
+    <div class="modal-section-label">Pricing & Download</div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Price (AUD)</label>
+        <input type="text" id="newPrice" placeholder="e.g. 97" />
+      </div>
+      <div class="form-group">
+        <label>Enrol / Checkout Link</label>
+        <input type="url" id="newEnrolLink" placeholder="https://…" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>PDF Download URL</label>
+      <input type="url" id="newPdfUrl" placeholder="https://drive.google.com/… or Dropbox link" />
+      <div class="form-hint">Paste your Google Drive, Dropbox, or direct PDF link here. Students will be sent here after purchase.</div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('courseModal')">Cancel</button>
+      <button class="btn-save" id="modalSaveBtn" onclick="saveCourse()">Save Course</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── MODAL: DOWNLOAD ── -->
+<div class="modal-overlay" id="downloadModal" onclick="closeOnOverlay(event, 'downloadModal')">
+  <div class="modal">
+    <div class="download-icon">📥</div>
+    <div class="modal-eyebrow">Resync Academy</div>
+    <h2 id="dlTitle">Australian Bookkeeping</h2>
+    <p>Your course PDF is ready. Click the button below to open or download your materials. Save it somewhere handy — it's yours to keep!</p>
+    <a id="dlLink" href="#" target="_blank" class="btn-download-confirm">
+      <svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 3v10M6 9l4 4 4-4"/><path d="M3 17h14"/></svg>
+      Open & Download PDF
+    </a>
+    <button class="btn-download-close" onclick="closeModal('downloadModal')">Close</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <img src="images/logo-footer.png" alt="Resync Virtual Assistance" class="footer-logo">
+      <p class="footer-tagline">Trusted bookkeeping and finance admin support for growing Australian businesses.</p>
+    </div>
+    <div>
+      <div class="footer-col-head">Quick Links</div>
+      <ul class="footer-links">
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#how">How We Work</a></li>
+        <li><a href="index.html#faq">FAQs</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-head">Get in Touch</div>
+      <ul class="footer-links">
+        <li><a href="#" data-booking-link>Book a Discovery Call</a></li>
+        <li><a href="mailto:hello@resyncva.com">Email: hello@resyncva.com</a></li>
+        <li><a href="#" data-whatsapp-link>WhatsApp</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 Resync Virtual Assistance Services · resyncva.com</div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // ── state ──
+  const icons = ['📒','📘','📙','📊','🗂️','📑','🧾','📋'];
+  let activeFilter = 'all';
+  let editingCard  = null;
+
+  // ── admin toggle ──
+  function toggleAdmin() {
+    document.body.classList.toggle('admin-mode');
+  }
+
+  // ── filter ──
+  function setFilter(f, el) {
+    activeFilter = f;
+    document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+    el.classList.add('active');
+    filterCards();
+  }
+
+  function filterCards() {
+    const q = document.getElementById('searchInput').value.toLowerCase();
+    document.querySelectorAll('#courseGrid .card:not(.card-add)').forEach(card => {
+      const title = card.dataset.title || '';
+      const tags  = card.dataset.tags  || '';
+      const ms    = !q || title.includes(q) || tags.includes(q);
+      const mf    = activeFilter === 'all' || tags.includes(activeFilter);
+      card.style.display = (ms && mf) ? '' : 'none';
+    });
+  }
+
+  // ── modal helpers ──
+  function openModal() {
+    editingCard = null;
+    document.getElementById('modalHeading').textContent = 'Add New Course';
+    document.getElementById('modalSaveBtn').textContent = 'Save Course';
+    ['newTitle','newDesc','newTags','newModules','newPrice','newPdfUrl','newEnrolLink']
+      .forEach(id => document.getElementById(id).value = '');
+    document.getElementById('newCategory').value = '';
+    document.getElementById('courseModal').classList.add('open');
+  }
+
+  function closeModal(id) {
+    document.getElementById(id).classList.remove('open');
+    editingCard = null;
+  }
+
+  function closeOnOverlay(e, id) {
+    if (e.target === document.getElementById(id)) closeModal(id);
+  }
+
+  // ── download modal ──
+  function openDownload(e, title, btn) {
+    e.preventDefault();
+    const pdf = btn.dataset.pdf;
+    if (!pdf) {
+      alert('PDF link not set for this course yet. Check back soon!');
+      return;
+    }
+    document.getElementById('dlTitle').textContent = title;
+    document.getElementById('dlLink').href = pdf;
+    document.getElementById('downloadModal').classList.add('open');
+  }
+
+  // ── edit card ──
+  function editCard(btn) {
+    const card = btn.closest('.card');
+    editingCard = card;
+
+    document.getElementById('newTitle').value    = card.querySelector('.card-title').textContent;
+    document.getElementById('newDesc').value     = card.querySelector('.card-desc').textContent;
+    document.getElementById('newCategory').value = (card.dataset.tags.split(' ')[0] || '').toLowerCase();
+    document.getElementById('newModules').value  = card.querySelector('.modules-count')?.textContent || '';
+    document.getElementById('newPrice').value    = card.querySelector('.price-amount')?.textContent?.replace(/[^0-9]/g,'') || '';
+    document.getElementById('newPdfUrl').value   = card.querySelector('.btn-download')?.dataset.pdf || '';
+    document.getElementById('newEnrolLink').value = card.querySelector('.btn-enrol')?.href === location.href ? '' : card.querySelector('.btn-enrol')?.href || '';
+
+    const tagsEls = card.querySelectorAll('.tag');
+    document.getElementById('newTags').value = Array.from(tagsEls).map(t => t.textContent).join(', ');
+
+    document.getElementById('modalHeading').textContent = 'Edit Course';
+    document.getElementById('modalSaveBtn').textContent = 'Update Course';
+    document.getElementById('courseModal').classList.add('open');
+  }
+
+  // ── delete card ──
+  function deleteCard(btn) {
+    if (!confirm('Remove this course?')) return;
+    btn.closest('.card').remove();
+    updateCourseCount();
+  }
+
+  // ── save / update ──
+  function saveCourse() {
+    const title      = document.getElementById('newTitle').value.trim();
+    const desc       = document.getElementById('newDesc').value.trim();
+    const category   = document.getElementById('newCategory').value;
+    const modules    = document.getElementById('newModules').value;
+    const price      = document.getElementById('newPrice').value.trim();
+    const pdfUrl     = document.getElementById('newPdfUrl').value.trim();
+    const enrolLink  = document.getElementById('newEnrolLink').value.trim();
+    const tagsRaw    = document.getElementById('newTags').value;
+
+    if (!title) { alert('Please enter a course title.'); return; }
+
+    const tagList  = tagsRaw.split(',').map(t => t.trim()).filter(Boolean);
+    const modCount = modules ? parseInt(modules) : 10;
+    const catLabel = category ? category.charAt(0).toUpperCase() + category.slice(1) : 'General';
+    const tagsHTML = tagList.map(t => `<span class="tag">${t}</span>`).join('');
+    const modList  = Array.from({length: Math.min(4, modCount)}, (_,i) =>
+      `<div class="module-item">Module ${i+1} – Coming Soon</div>`).join('');
+    const more     = modCount > 4 ? `<div class="module-more">+ ${modCount-4} more modules</div>` : '';
+    const tagsData = [category, ...tagList].filter(Boolean).join(' ').toLowerCase();
+    const priceDisplay = price ? `$${price}<span>AUD</span>` : `TBA`;
+    const hasPdf   = pdfUrl ? '' : ' no-pdf';
+    const icon     = editingCard
+      ? editingCard.querySelector('.card-icon').textContent
+      : icons[Math.floor(Math.random() * icons.length)];
+
+    if (editingCard) {
+      // Update existing card
+      editingCard.dataset.tags  = tagsData;
+      editingCard.dataset.title = title.toLowerCase();
+      editingCard.querySelector('.card-title').textContent     = title;
+      editingCard.querySelector('.card-category').textContent  = catLabel;
+      editingCard.querySelector('.card-desc').textContent      = desc || 'Training materials coming soon.';
+      editingCard.querySelector('.tags').innerHTML             = tagsHTML;
+      editingCard.querySelector('.modules-count').textContent  = modCount;
+      editingCard.querySelector('.price-amount').innerHTML     = priceDisplay;
+      editingCard.querySelector('.btn-download').dataset.pdf   = pdfUrl;
+      editingCard.querySelector('.btn-download').className     = 'btn-download' + hasPdf;
+      if (enrolLink) editingCard.querySelector('.btn-enrol').href = enrolLink;
+      closeModal('courseModal');
+      return;
+    }
+
+    // Build new card
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.dataset.tags  = tagsData;
+    card.dataset.title = title.toLowerCase();
+    card.style.animationDelay = '0s';
+    card.innerHTML = `
+      <div class="card-stripe"></div>
+      <div class="card-header">
+        <div class="card-icon">${icon}</div>
+        <div class="card-meta">
+          <div class="card-category">${catLabel}</div>
+          <div class="card-title">${title}</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="card-desc">${desc || 'Training materials coming soon.'}</p>
+        ${tagsHTML ? `<div class="tags">${tagsHTML}</div>` : ''}
+        <div class="modules-list">
+          <div class="modules-label">What's Inside</div>
+          ${modList}${more}
+        </div>
+        <div class="price-block">
+          <div>
+            <div class="price-label">Course Price</div>
+            <div class="price-amount">${priceDisplay}</div>
+            <div class="price-note">One-time payment · PDF included</div>
+          </div>
+          <div class="price-right">
+            <div class="modules-count">${modCount}</div>
+            <div class="modules-count-label">Modules</div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <a href="${enrolLink || '#'}" class="btn-enrol">
+  
+          Get This Resource
+        </a>
+        <a class="btn-download${hasPdf}" href="#" data-pdf="${pdfUrl}" onclick="openDownload(event, '${title}', this)">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 3v10M6 9l4 4 4-4"/><path d="M3 17h14"/></svg>
+          Download PDF
+        </a>
+      </div>
+      <div class="card-admin-row">
+        <button class="btn-edit-card" onclick="editCard(this)">
+          <svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 3.3a1.5 1.5 0 0 1 2 2L6 16 2 18l2-4L14.7 3.3z"/></svg>
+          Edit
+        </button>
+        <button class="btn-delete-card" onclick="deleteCard(this)" title="Delete course">
+          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h14M8 6V4h4v2M19 6l-1 12H2L1 6"/></svg>
+        </button>
+      </div>`;
+
+    document.getElementById('courseGrid').insertBefore(card, document.querySelector('.card-add'));
+    updateCourseCount();
+    closeModal('courseModal');
+  
+}
+</script>
+<script src="config.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

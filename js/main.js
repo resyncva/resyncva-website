@@ -46,7 +46,8 @@ const FADE_SELECTORS = [
   '.hero-badge', '.hero-headline', '.hero-sub', '.hero-cta', '.hero-visual',
   '.who-nudge',
   // services.html
-  '.svc-card', '.intro-strip', '.cta-band-text', '.cta-band-actions'
+  '.svc-card', '.intro-strip', '.cta-band-text', '.cta-band-actions',
+  '.sec-tag', '.svc-section-heading'
 ].join(', ');
 
 const FADE_DURATION = 700; // ms — match this with the CSS transition duration
